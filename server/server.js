@@ -5,7 +5,6 @@ const pool = require('./db')
 
 const userRoutes = require('./routes/userRoutes');
 
-
 const PORT = process.env.PORT || 8010
 
 const app = express();
@@ -14,6 +13,6 @@ app.use(cors());
 
 app.use('/users', userRoutes);
 
-app.listen(PORT, ()=> console.log(`SERVER RUNNING ON PORT ${PORT}`))
+app.listen(PORT, ()=> console.log(`SERVER RUNNING ON PORT ${PORT}!`))
 
 // npm run dev
