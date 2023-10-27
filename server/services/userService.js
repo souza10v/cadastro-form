@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const pool = require('../db');
+const bcrypt = require('bcrypt');
 
 const isUserIDUnique = async (userID) => {
 
@@ -33,18 +34,18 @@ const isUserIDUnique = async (userID) => {
             }
         }
     }
-    console.log(userID)
     return { userID, error };
 };
 
-const createUser = async (username, password, email, firstName, lastName, userID) => {
+const createUser = async (firstName, userName, lastName, userPassword, userEmail, userID) => {
     //  const { username, password, email, first_name, last_name, date_of_birth, gender, city, state, country, registration_date, last_login_date, account_status, permissions} = req.body  
     const { userID: confirmedUserID, error: errorActual } = await isUserIDUnique(userID);
 
     const salt = bcrypt.genSaltSync(10)
-    const hashedPassword = bcrypt.hashSync(password, salt)
 
-    const newUser = await pool.query('INSERT INTO users(user_id, username, password, email, first_name, last_name) VALUES($1, $2, $3, $4, $5, $6)', [confirmedUserID, username, hashedPassword, email, firstName, lastName]);
+    const hashedPassword = bcrypt.hashSync(userPassword, salt)
+
+    const newUser = await pool.query('INSERT INTO users(user_id, username, password, email, first_name, last_name) VALUES($1, $2, $3, $4, $5, $6)', [confirmedUserID, userName, hashedPassword, userEmail, firstName, lastName]);
     return { newUser, errorActual }
 
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import './styles.css'
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useContext } from "react";
+import singupUser from "../../api/userApi";
 
 export const CreateUser = () => {
 
@@ -11,11 +12,24 @@ export const CreateUser = () => {
     const [ userEmail, setUserEmail ] = useState("")
     const [ userGender, setGender ] = useState("")
 
-    console.log(firstName, userName, lastName, userPassword, userEmail, userGender)
-
-    const handleSubmit = (event: FormEvent) => {
+    const handleSubmit = async (event: FormEvent) => {
         event.preventDefault()
         console.log("handle submit")
+
+        if(firstName === '' || userName === '' || userPassword === '') {
+            console.log("Preencha todos os campos") // exibir mensagem no front
+        }
+
+        let data = {
+            firstName,
+            userName,
+            lastName,
+            userPassword,
+            userEmail,
+            userGender
+        }
+
+        await singupUser(data);
     }
 
     return (
