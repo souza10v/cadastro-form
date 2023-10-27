@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import  Home  from './pages/home';
 import { Login } from './pages/login'
-import  { CreateUser } from './pages/createuser/CreateUser';
+import  { CreateUser } from './pages/createuser';
 import { NewForm } from './pages/newform';
 
 import { createBrowserRouter } from 'react-router-dom';
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <Login/>
   },
   {
-    path: '/newuser',
+    path: '/createuser',
     element: <CreateUser/>
   },
   

@@ -16,11 +16,13 @@ export const Login = () => {
                     <h1>Login</h1>
                     <form className="login-id" onSubmit={handleLogin}>
                         <input
+                        className="login-input"
                             type="text"
                             placeholder="Nome de usuario"
                             required
                         />
                         <input
+                        className="login-input"
                             type="password"
                             placeholder="Senha"
                             required

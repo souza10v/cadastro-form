@@ -1,4 +1,4 @@
-.login-container {
+.singup-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,7 @@
     margin: 0;
 }
 
-.login-box {
+.singup-box {
     text-align: center;
     padding: 20px;
     border: 1px solid #dfdede;
@@ -14,23 +14,32 @@
     background-color: #f6f3f3;
     width: 400px;
     margin: 0 auto;
+    justify-content: center;
+    align-items: left;
+}
+
+.singup-form {
+    text-align: left; 
+    display: flex;
+    flex-direction: column; 
 }
 
 h1{
     padding: 20px;
 }
 
-.login-form {
-    text-align: center;
-}
 
-.login-input {
+input {
     display: block;
     margin: 10px auto;
     padding: 10px;
     height: 30px;
     width: 250px;
     border: 1px solid #000;
+    text-align: left;
+}
+.input p{
+    text-align: left;
 }
 
 button {
