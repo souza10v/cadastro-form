@@ -5,8 +5,6 @@ const createUser = async (req, res) => {
     const { username, password, email, first_name, last_name } = req.body;
     const userID = uuidv4();
 
-    console.log(userID)
-
     try {
         const {newUser, errorActual} = await userService.createUser(username, password, email, first_name, last_name, userID);
         res.json({ message: 'Created successfully', error: errorActual })
