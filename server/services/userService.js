@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const isUserIDUnique = async (userID) => {
 
-    const error = ""
+    const errorActual = ""
     let isUnique = false;
 
     while (!isUnique) {
@@ -22,19 +22,19 @@ const isUserIDUnique = async (userID) => {
             if (error.code === '23505') {
                 if (error.detail.includes('email')) {
                     console.log('Email already exists.');
-                    error = 'Email already exists.';
+                    errorActual = 'Email already exists.';
                 } else if (error.detail.includes('username')) {
                     console.log('Username already exists.');
-                    error = 'Username already exists.';
+                    errorActual = 'Username already exists.';
                 } else {
                     console.log(`Other unique constraint violation: ${error.detail}`);
-                    error = `Other unique constraint violation: ${error.detail}`;
+                    errorActual = `Other unique constraint violation: ${error.detail}`;
                 }
-                console.log(`Error getting id ${error}`)
+                console.log(`Error getting id ${errorActual}`)
             }
         }
     }
-    return { userID, error };
+    return { userID, errorActual };
 };
 
 const createUser = async (firstName, userName, lastName, userPassword, userEmail, userID) => {
