@@ -73,9 +73,10 @@ const userLogin = async (username, password) => {
         const errorActual = ""
 
         return {foundUsername, errorActual, userToken} 
+
     } else {
         const foundUsername = ""
-        const errorActual = "Falha ao logar"
+        const errorActual = "Usuário ou senha incorretos"
         const userToken = null;
         
         return {foundUsername, errorActual, userToken} 

@@ -8,7 +8,7 @@
 
 .login-box {
     text-align: center;
-    padding: 20px;
+    padding: 30px;
     border: 1px solid #dfdede;
     border-radius: 8px;
     background-color: #f6f3f3;
@@ -50,6 +50,7 @@ button {
     text-decoration: none !important;
     color: #000000 !important;
     cursor: pointer;
+    margin: 30px;
   }
 
 a:link {
@@ -64,3 +65,4 @@ a:visited {
     color: #000000;
     cursor: pointer;
 }
+

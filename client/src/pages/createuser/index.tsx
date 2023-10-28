@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import './styles.css'
-import { FormEvent, useState, useContext } from "react";
-import singupUser from "../../api/userApi";
+import { FormEvent, useState } from "react";
+import {singupUser} from "../../api/userApi";
 
 export const CreateUser = () => {
 
@@ -16,7 +16,6 @@ export const CreateUser = () => {
     const [userEmail, setUserEmail] = useState("");
     const [userGender, setGender] = useState("");
     const [errorCatched, setErrorCatched] = useState("")
-
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault()

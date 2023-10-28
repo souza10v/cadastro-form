@@ -8,12 +8,17 @@ type UserDataPros = {
     userGender: string;
 }
 
+type loginData = {
+    username: string;
+    password: string;
+}
+
 const singupUser = async (userData: UserDataPros) => {
 
     //const response = await fetch(`http://localhost:8010/users/createuser`, {
 
     try {
-        const response = await fetch(`http://localhost:8010/users/createuser`, {
+        const response = await fetch(`http://localhost:8010/users/createuser`, { //ver .env
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -22,7 +27,7 @@ const singupUser = async (userData: UserDataPros) => {
         })
 
         if (response.status === 200) {
-            const responseData = await response.json(); // Wait for the JSON response
+            const responseData = await response.json(); // esperar json resposta
             console.log("Response to front end from server:", responseData);
             return responseData;
         }
@@ -33,4 +38,27 @@ const singupUser = async (userData: UserDataPros) => {
     }
 }
 
-export default singupUser
+const userLogin = async (loginData : loginData) => {
+
+    try {
+        const response = await fetch(`http://localhost:8010/users/login`, { 
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(loginData)
+        })
+
+        if (response.status === 200) {
+            const responseData = await response.json(); 
+            console.log("login sucessful")
+            console.log("Response to front end from server:", responseData);
+            return responseData;
+        }
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export { singupUser, userLogin }
