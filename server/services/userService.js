@@ -1,6 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const pool = require('../db');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const isUserIDUnique = async (userID) => {
 
@@ -50,8 +51,40 @@ const createUser = async (firstName, userName, lastName, userPassword, userEmail
 
 }
 
+const userLogin = async (username, password) => {
+
+    const user = await pool.query('SELECT * FROM users WHERE username = $1',[username])
+
+    if (!user.rows.length) {
+
+        const foundUsername = null;
+        const errorActual = 'Usuário não cadastrado';
+        const userToken = null;
+
+        return { foundUsername, errorActual , userToken};
+
+    }
+
+    const sucess = await bcrypt.compare(password, user.rows[0].password)
+    const userToken = jwt.sign({ username }, 'secret', { expiresIn: '1hr' })
+
+    if (sucess) {
+        const foundUsername = user.rows[0]
+        const errorActual = ""
+
+        return {foundUsername, errorActual, userToken} 
+    } else {
+        const foundUsername = ""
+        const errorActual = "Falha ao logar"
+        const userToken = null;
+        
+        return {foundUsername, errorActual, userToken} 
+    }
+}
+
 module.exports = {
     isUserIDUnique,
     createUser,
+    userLogin,
     // Other user-related services can be defined here
 }

@@ -14,8 +14,6 @@ const createUser = async (req, res) => {
        // console.log(`Error creating id: ${error.detail}`) //apagar
         //res.json({ error: error.detail }) //apagar
 
-
-
         if (error.code === '23505') {
             if (error.detail.includes('email')) {
                 console.log('Email already exists.');
@@ -34,6 +32,21 @@ const createUser = async (req, res) => {
     }
 };
 
+
+
+const loginUser = async (req, res) => {
+    const {username, password} = req.body
+    try{
+        const {foundUsername, errorActual, userToken} = await userService.userLogin(username, password)
+        res.json({ "username": foundUsername, "error": errorActual, "token" : userToken})
+
+    } catch (error){
+        console.log("controller")
+        console.log(error)
+        res.json({ "username": "", "error": error})
+    }
+}
+
 module.exports = {
-    createUser,
+    createUser, loginUser
 };
