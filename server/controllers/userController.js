@@ -38,12 +38,12 @@ const loginUser = async (req, res) => {
     const {username, password} = req.body
     try{
         const {foundUsername, errorActual, userToken} = await userService.userLogin(username, password)
-        res.json({ "username": foundUsername, "error": errorActual, "token" : userToken})
+        res.json({ "user": foundUsername, "error": errorActual, "token" : userToken})
 
     } catch (error){
         console.log("controller")
         console.log(error)
-        res.json({ "username": "", "error": error})
+        res.json({ "user": "", "error": error})
     }
 }
 
