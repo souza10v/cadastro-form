@@ -36,10 +36,16 @@ const createUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
     const {username, password} = req.body
+
     try{
         const {foundUsername, errorActual, userToken} = await userService.userLogin(username, password)
-        res.json({ "user": foundUsername, "error": errorActual, "token" : userToken})
 
+        if (errorActual === null && userToken != null){
+            res.json({ "user": foundUsername, "error": null, "token" : userToken}) //login
+        } else {
+            res.json({"user": foundUsername, "error": errorActual, "token" : null}) //not login
+        }
+        
     } catch (error){
         console.log("controller")
         console.log(error)

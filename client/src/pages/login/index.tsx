@@ -8,14 +8,15 @@ export const Login = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-    const [errorCatched, setErrorCatched] = useState("")
+    const [errorCatched, setErrorCatched] = useState<string>("");
+
+    
 
     const navigate = useNavigate();
     
     const handleLogin = async (e: FormEvent) => {
         e.preventDefault()
-        console.log("working")
-
+ 
         if (username === '' || password === '' ) {
             setErrorCatched("Preencha todos os campos");
             return; 
@@ -29,12 +30,15 @@ export const Login = () => {
         const response = await userLogin(data)
         
         console.log("front")
-        console.log(response)
-
-        if (response && response.error) {
-            setErrorCatched(response.error);
-        } else {
+        console.log(response.error)
+        
+        //token
+        if (!response.error) {
             navigate("/dashboard");
+            setErrorCatched("");
+        } else {
+            setErrorCatched(response.error.toString());
+            console.log("not login")
         }
 
     }

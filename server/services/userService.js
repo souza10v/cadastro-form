@@ -57,7 +57,7 @@ const userLogin = async (username, password) => {
 
     if (!user.rows.length) {
 
-        const foundUsername = null;
+        const foundUsername = username;
         const errorActual = 'Usuário não cadastrado';
         const userToken = null;
 
@@ -69,14 +69,15 @@ const userLogin = async (username, password) => {
     const userToken = jwt.sign({ username }, 'secret', { expiresIn: '1hr' })
 
     if (sucess) {
-        const foundUsername = user.rows[0]
-        const errorActual = ""
+        const foundUsername = user.rows[0];
+        const errorActual = null;
+        userToken = userToken;
 
         return {foundUsername, errorActual, userToken} 
 
     } else {
-        const foundUsername = ""
-        const errorActual = "Usuário ou senha incorretos"
+        const foundUsername = "";
+        const errorActual = "Usuário ou senha incorretos";
         const userToken = null;
         
         return {foundUsername, errorActual, userToken} 

@@ -41,6 +41,8 @@ export const CreateUser = () => {
 
         const response = await singupUser(data);
 
+        console.log("response index", response, response.error)
+
         if (response && response.error) {
             setErrorCatched(response.error);
         } else {

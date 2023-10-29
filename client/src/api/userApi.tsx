@@ -25,7 +25,7 @@ type fetchUserLoginData = {
 
 const gettingIP = async () => {
 
-    try{
+    try {
         const response = await fetch(`http://localhost:8010/users/getuserip`, {
             method: "POST",
             headers: {
@@ -42,7 +42,7 @@ const gettingIP = async () => {
             console.log("Error getting ip address");
         }
 
-    } catch (error){
+    } catch (error) {
         console.log("Error getting ip", error)
     }
 }
@@ -56,24 +56,24 @@ const deviceInformation = () => {
         browserVersion: "Unknown",
         os: "Unknown",
         renderingEngine: "Unknown",
-      };
-  
+    };
+
     const browserMatch = userAgent.match(/(Chrome|Safari|Firefox|Edge|IE|Opera)\/(\S+)/);
     if (browserMatch) {
-      info.browserName = browserMatch[1];
-      info.browserVersion = browserMatch[2];
+        info.browserName = browserMatch[1];
+        info.browserVersion = browserMatch[2];
     }
 
     const osMatch = userAgent.match(/\(([^)]+)\)/);
     if (osMatch) {
-      info.os = osMatch[1];
+        info.os = osMatch[1];
     }
-  
+
     const engineMatch = userAgent.match(/AppleWebKit\/(\S+)/);
     if (engineMatch) {
-      info.renderingEngine = engineMatch[1];
+        info.renderingEngine = engineMatch[1];
     }
-  
+
     return info;
 
 }
@@ -144,6 +144,8 @@ const singupUser = async (userData: UserDataPros) => {
 
 const userLogin = async (loginData: loginData) => {
 
+    console.log('login is: ', loginData.username)
+    
     try {
         const response = await fetch(`http://localhost:8010/users/login`, {
             method: "POST",
@@ -154,43 +156,59 @@ const userLogin = async (loginData: loginData) => {
         })
 
         if (response.status === 200) {
+
+            console.log("200")
+
             const responseData = await response.json();
-            console.log("login sucessful")
 
-            const location = await geoLocation() || "N/A";
-            const deviceInfo = JSON.stringify(deviceInformation()) || "N/A";
-            const ipAddress = await gettingIP() || "N/A"
+            console.log(responseData)
 
-            const userLog = {
-                "username": loginData.username,
-                "userID": responseData.user.user_id,
-                "sessionToken": responseData.token,
-                "ipAddress": ipAddress,
-                "success": true,
-                "location": location, 
-                "deviceInfo": deviceInfo, 
+            if (responseData.token != null && responseData.error === null ) {
+
+                //salvar cookie 
+
+                console.log("login sucessful")
+
+                const location = await geoLocation() || "N/A";
+                const deviceInfo = JSON.stringify(deviceInformation()) || "N/A";
+                const ipAddress = await gettingIP() || "N/A"
+
+                const userLog = {
+                    "username": loginData.username,
+                    "userID": responseData.user.user_id,
+                    "sessionToken": responseData.token,
+                    "ipAddress": ipAddress,
+                    "success": true,
+                    "location": location,
+                    "deviceInfo": deviceInfo,
+                }
+
+                await fetchUserLog(userLog);
+
+                return responseData;
             }
 
-            await fetchUserLog(userLog);
+            else {
 
-            return responseData;
-        }
-        else {
-            const responseData = await response.json();
-            console.log("error saving log")
+                console.log("error logging. saving log")
 
-            const location = await geoLocation() || "N/A";
-            const deviceInfo = JSON.stringify(deviceInformation()) || "N/A";
-            const ipAddress = await gettingIP() || "N/A"
+                const location = await geoLocation() || "N/A";
+                const deviceInfo = JSON.stringify(deviceInformation()) || "N/A";
+                const ipAddress = await gettingIP() || "N/A"
 
-            const userLog = {
-                "username": loginData.username,
-                "userID": responseData.user.user_id,
-                "sessionToken": responseData.token,
-                "ipAddress": ipAddress,
-                "success": false,
-                "location": location, 
-                "deviceInfo": deviceInfo, 
+                const userLog = {
+                    "username": loginData.username,
+                    "userID": responseData.user.user_id,
+                    "sessionToken": responseData.token,
+                    "ipAddress": ipAddress,
+                    "success": false,
+                    "location": location,
+                    "deviceInfo": deviceInfo,
+                }
+
+                await fetchUserLog(userLog);
+
+                return responseData;
             }
         }
 
