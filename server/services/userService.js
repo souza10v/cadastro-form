@@ -71,7 +71,6 @@ const userLogin = async (username, password) => {
     if (sucess) {
         const foundUsername = user.rows[0];
         const errorActual = null;
-        userToken = userToken;
 
         return {foundUsername, errorActual, userToken} 
 

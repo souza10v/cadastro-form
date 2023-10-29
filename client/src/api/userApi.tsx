@@ -1,3 +1,5 @@
+import { useCookies } from "react-cookie";
+
 type UserDataPros = {
     firstName: string;
     userName: string;
@@ -157,17 +159,17 @@ const userLogin = async (loginData: loginData) => {
 
         if (response.status === 200) {
 
-            console.log("200")
-
             const responseData = await response.json();
 
-            console.log(responseData)
+            //console.log("200 response data", responseData) 
 
             if (responseData.token != null && responseData.error === null ) {
 
                 //salvar cookie 
 
-                console.log("login sucessful")
+                //console.log("login sucessful")
+
+                // creat e a cookie here
 
                 const location = await geoLocation() || "N/A";
                 const deviceInfo = JSON.stringify(deviceInformation()) || "N/A";
@@ -190,7 +192,7 @@ const userLogin = async (loginData: loginData) => {
 
             else {
 
-                console.log("error logging. saving log")
+                //console.log("error logging. saving log")
 
                 const location = await geoLocation() || "N/A";
                 const deviceInfo = JSON.stringify(deviceInformation()) || "N/A";
@@ -211,7 +213,6 @@ const userLogin = async (loginData: loginData) => {
                 return responseData;
             }
         }
-
     } catch (error) {
         console.log(error)
     }

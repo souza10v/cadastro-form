@@ -1,18 +1,17 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useState, useEffect } from "react"
 import './styles.css'
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../../api/userApi"
+import { useCookies } from "react-cookie";
 
 export const Login = () => {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-
     const [errorCatched, setErrorCatched] = useState<string>("");
 
-    
-
     const navigate = useNavigate();
+    const [authToken, setCookie] = useCookies(["token"]);
     
     const handleLogin = async (e: FormEvent) => {
         e.preventDefault()
@@ -29,19 +28,28 @@ export const Login = () => {
 
         const response = await userLogin(data)
         
-        console.log("front")
-        console.log(response.error)
-        
-        //token
-        if (!response.error) {
+        //console.log("login index", response.token)
+
+        setCookie("token", response.token, { path: '/' });
+
+        // if (!response.error) {
+        //     navigate("/dashboard");
+        // } else {
+        //     setErrorCatched(response.error.toString());
+        //     console.log("not login")
+        // }
+
+        if (authToken) {
             navigate("/dashboard");
-            setErrorCatched("");
         } else {
             setErrorCatched(response.error.toString());
             console.log("not login")
         }
 
+  
     }
+
+
 
     return (
             <div className="login-container">
