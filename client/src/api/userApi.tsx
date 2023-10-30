@@ -38,7 +38,7 @@ const gettingIP = async () => {
         if (response.status === 200) {
             const data = await response.json();
             const userIP = data.userIpAddress;
-            console.log("User's ip address:", userIP);
+            console.log("Users ip address:", userIP);
             return userIP;
         } else {
             console.log("Error getting ip address");
@@ -111,10 +111,10 @@ const fetchUserLog = async (userLoginData: fetchUserLoginData) => {
             body: JSON.stringify(userLoginData)
         })
 
-        console.log("Saved user login db")
+        //console.log("User saved login db")
 
     } catch (error) {
-        console.log(`Error user login db`, error)
+        //console.log(`Error user login db`, error)
     }
 
 }
@@ -146,7 +146,7 @@ const singupUser = async (userData: UserDataPros) => {
 
 const userLogin = async (loginData: loginData) => {
 
-    console.log('login is: ', loginData.username)
+    //console.log('login is: ', loginData.username)
     
     try {
         const response = await fetch(`http://localhost:8010/users/login`, {

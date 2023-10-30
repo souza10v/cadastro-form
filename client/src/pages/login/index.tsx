@@ -1,4 +1,4 @@
-import { FormEvent, useState, useEffect } from "react"
+import { FormEvent, useState } from "react"
 import './styles.css'
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../../api/userApi"
@@ -30,7 +30,9 @@ export const Login = () => {
         
         //console.log("login index", response.token)
 
-        setCookie("token", response.token, { path: '/' });
+        const expirationTime = new Date().getTime() +  (60 * 60 * 1000);
+
+        setCookie("token", response.token, { path: '/', expires: new Date(expirationTime)});
 
         // if (!response.error) {
         //     navigate("/dashboard");
@@ -45,10 +47,7 @@ export const Login = () => {
             setErrorCatched(response.error.toString());
             console.log("not login")
         }
-
-  
     }
-
 
 
     return (

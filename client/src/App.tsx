@@ -2,35 +2,34 @@ import React from 'react';
 import './App.css';
 //import  Home  from './pages/home';
 import { Login } from './pages/login'
-import  { CreateUser } from './pages/createuser';
-import { NewForm } from './pages/newform';
-
+import { CreateUser } from './pages/createuser';
+import { NewForm } from './pages/formularios/formAPT';
 import { createBrowserRouter } from 'react-router-dom';
 import { Dashboard } from './pages/dashboard';
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element: <Login/>
+    path: '/',
+    element: <Login />
     //element:<Home/>
   },
   {
-    path:'/login',
-    element: <Login/>
+    path: '/login',
+    element: <Login />
   },
   {
     path: '/createuser',
-    element: <CreateUser/>
+    element: <CreateUser />
   },
-  
+
   {
     path: '/newform',
-    element: <NewForm/>
+    element: <NewForm />
   },
   {
     path: '/dashboard',
-    element: <Dashboard/>
+    element: <Dashboard />
   }
 ])
 
-export {router};
+export { router };
