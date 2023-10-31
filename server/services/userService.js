@@ -53,7 +53,7 @@ const createUser = async (firstName, userName, lastName, userPassword, userEmail
 
 const userLogin = async (username, password) => {
 
-    const user = await pool.query('SELECT * FROM users WHERE username = $1',[username])
+    const user = await pool.query('SELECT * FROM users WHERE username = $1', [username])
 
     if (!user.rows.length) {
 
@@ -61,7 +61,7 @@ const userLogin = async (username, password) => {
         const errorActual = 'Usuário não cadastrado';
         const userToken = null;
 
-        return { foundUsername, errorActual , userToken};
+        return { foundUsername, errorActual, userToken };
 
     }
 
@@ -72,14 +72,14 @@ const userLogin = async (username, password) => {
         const foundUsername = user.rows[0];
         const errorActual = null;
 
-        return {foundUsername, errorActual, userToken} 
+        return { foundUsername, errorActual, userToken }
 
     } else {
         const foundUsername = "";
         const errorActual = "Usuário ou senha incorretos";
         const userToken = null;
-        
-        return {foundUsername, errorActual, userToken} 
+
+        return { foundUsername, errorActual, userToken }
     }
 }
 
