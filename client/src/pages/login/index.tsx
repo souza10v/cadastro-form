@@ -12,6 +12,8 @@ export const Login = () => {
 
     const navigate = useNavigate();
     const [authToken, setCookie] = useCookies(["token"]);
+    const [userName, setUserName] = useCookies(["userName"]);
+    const [firstName, setFirstName] = useCookies(["firstName"]);
     
     const handleLogin = async (e: FormEvent) => {
         e.preventDefault()
@@ -33,6 +35,8 @@ export const Login = () => {
         const expirationTime = new Date().getTime() +  (60 * 60 * 1000);
 
         setCookie("token", response.token, { path: '/', expires: new Date(expirationTime)});
+        setUserName("userName", response.user.username, { path: '/', expires: new Date(expirationTime)});
+        setFirstName("firstName", response.user.first_name, { path: '/', expires: new Date(expirationTime)});
 
         // if (!response.error) {
         //     navigate("/dashboard");
@@ -77,7 +81,7 @@ export const Login = () => {
                         <p></p>
                     </form>
                     <div id="create-account-link">
-                        <Link to="/createuser">Create Account  </Link>
+                        <Link to="/createuser">Create Account {`->`} </Link>
                     </div>
                 </div>
             </div>

@@ -92,14 +92,40 @@ body {
     border: 5px solid transparent;
 }
 
-
-
-.user-input-dot-gender{
-
+.user-input-checkbox{
+    margin:30px;
+    width: 40%;
+    float: left;
 }
+
+
 
 #dot-1:checked ~ .user-input-category label[for="dot-1"] .user-input-dot-one,
 #dot-2:checked ~ .user-input-category label[for="dot-2"] .user-input-dot-one {
+   border-color: #d9d9d9;
+   background: #9b59b6;
+} form input[type="radio"]{
+    display: none;
+}
+
+#dot-3:checked ~ .user-input-category label[for="dot-3"] .user-input-dot-one,
+#dot-4:checked ~ .user-input-category label[for="dot-4"] .user-input-dot-one {
+   border-color: #d9d9d9;
+   background: #9b59b6;
+} form input[type="radio"]{
+    display: none;
+}
+
+#dot-5:checked ~ .user-input-category label[for="dot-5"] .user-input-dot-one,
+#dot-6:checked ~ .user-input-category label[for="dot-6"] .user-input-dot-one {
+   border-color: #d9d9d9;
+   background: #9b59b6;
+} form input[type="radio"]{
+    display: none;
+}
+
+#dot-7:checked ~ .user-input-category label[for="dot-7"] .user-input-dot-one,
+#dot-8:checked ~ .user-input-category label[for="dot-8"] .user-input-dot-one {
    border-color: #d9d9d9;
    background: #9b59b6;
 } form input[type="radio"]{
@@ -120,5 +146,6 @@ body {
     height: 100%;
     width: 90%;
 }
+
 
 
