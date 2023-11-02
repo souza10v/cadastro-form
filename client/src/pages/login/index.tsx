@@ -81,7 +81,7 @@ export const Login = () => {
                         <p></p>
                     </form>
                     <div id="create-account-link">
-                        <Link to="/createuser">Create Account {`->`} </Link>
+                        <Link to="/createuser">Criar nova conta {`->`} </Link>
                     </div>
                 </div>
             </div>

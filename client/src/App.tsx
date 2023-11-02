@@ -3,7 +3,7 @@ import './App.css';
 //import  Home  from './pages/home';
 import { Login } from './pages/login'
 import { CreateUser } from './pages/createuser';
-import { NewForm } from './pages/formularios/formAPT';
+import { NewForm } from './pages/newform/formAPT';
 import { createBrowserRouter } from 'react-router-dom';
 import { Dashboard } from './pages/dashboard';
 
